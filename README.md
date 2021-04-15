@@ -1,8 +1,12 @@
 # CSU22102-Final-Proj
 End of year project/assignment completed alongside a team of the following memebers;
+
 -Ciara Lynch 
+
 -James Fenlon
+
 -Matthew Dowse
+
 -Matthew Grouse
 
 ## GitHub Cheatsheet
