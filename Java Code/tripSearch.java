@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileInputStream ;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class tripSearch {
@@ -66,7 +67,7 @@ public class tripSearch {
 		}
 		return grid;
 	}
-	
+
 	static boolean validArrivalTime(String[][] grid, int size, String input) {
 		for(int i=0;i<size;i++) {
 			int j=1;
@@ -81,21 +82,36 @@ public class tripSearch {
 	static String getStopID(String[] string,String[] textStops,String[][] gridStopTimes, String[][] gridStops, int stopTimesSize,int stopsSize, String input) {
 		String answer="";
 		String finalAnswer="";
+		ArrayList<String> quickSort = new ArrayList<String>();
 		int duplicate=1;
 		for(int i=0;i<stopTimesSize;i++) {
 			int j=1;
 			String str = gridStopTimes[i][j];
 			if(str != null && str.equals(input)) {
-				String[] test;
 				str = gridStopTimes[i][3];
-				test = stopData(textStops, gridStops, str,stopsSize);
-				answer = "Match number "+ duplicate+ " to arrival time " + input+" is:\nStop ID: " + str + "\n"+ "Stop Code: "+ test[0] +
-						"\nStop Name: "+test[1]+"\nStop Destination: "+test[2]+"\nStop Latitude: "+test[3]+"\nStop Longitude: "+ test[4]+
-						"\nZone ID: "+ test[5];
-				finalAnswer = finalAnswer + "\n" + answer + "\n";
-				duplicate++;
+				quickSort.add(str);
 			}
 		}
+		String[] test;
+		String[] sendToQuickSort = quickSort.toArray(new String[0]);
+		int[] realSend=new int[sendToQuickSort.length];
+		for(int a=0;a<sendToQuickSort.length;a++) {
+			realSend[a] = Integer.parseInt(sendToQuickSort[a]);
+		}
+		realSend=quickSort(realSend);
+		for(int a=0;a<realSend.length;a++) {
+			sendToQuickSort[a] = Integer.toString(realSend[a]);
+		}
+		for(int b=0;b<realSend.length;b++) {
+			test = stopData(textStops, gridStops, sendToQuickSort[b],stopsSize);
+			answer = "Match number "+ duplicate+ " to arrival time " + input+" is:\nStop ID: " + test[0] + "\n"+ "Stop Code: "+ test[1] +
+					"\nStop Name: "+test[2]+"\nStop Destination: "+test[3]+"\nStop Latitude: "+test[4]+"\nStop Longitude: "+ test[5]+
+					"\nZone ID: "+ test[6];
+			finalAnswer = finalAnswer + "\n" + answer + "\n";
+			duplicate++;
+		}
+
+
 		return finalAnswer;
 	}
 
@@ -103,13 +119,13 @@ public class tripSearch {
 		String[] arr = textStops[1].split(",");
 		int columns = arr.length+1;
 		String[] stopInfo=new String[columns];
-		
+
 		for(int i=0;i<stopsSize;i++) {
 			int j=0;
 			String ID = gridStops[i][j];
 			if(ID != null && ID.equals(stopID)) {
 				for(int k=0;k<columns-1;k++) {
-					stopInfo[k]=gridStops[i][k+1];
+					stopInfo[k]=gridStops[i][k];
 				}
 
 			}
@@ -164,7 +180,47 @@ public class tripSearch {
 				System.out.println("Sorry, there are no arrival times that suit what you entered, try again!");
 			}
 		}
-		 
+
 	}
 
+	public static void quickSort(int[] a, int low, int high) {
+		// pick the pivot
+		int mid = low + (high - low) / 2;
+		double pivot = a[mid];
+
+		// make left < pivot and right > pivot
+		int i = low, j = high;
+		while (i <= j) {
+			while (a[i] < pivot) {
+				i++;
+			}
+
+			while (a[j] > pivot) {
+				j--;
+			}
+
+			if (i <= j) {
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+				i++;
+				j--;
+			}
+		}
+
+		// recursively sort two sub parts
+		if (low < j)
+			quickSort(a, low, j);
+
+		if (high > i)
+			quickSort(a, i, high);
+	}
+
+	static int[] quickSort (int[] a){
+		int min=0;
+		int max=(a.length)-1;
+		quickSort(a,min,max);
+		return a;
+
+	}//end quicksort
 }
