@@ -60,9 +60,6 @@ public class tripSearch {
 		for(int i=0;i<size;i++) {
 			string[i]=string[i].replaceAll(", ", ",");
 			arr = string[i].split(",");
-			/*for(int k=0;k<arr.length-1;k++) {
-				arr[k]= arr[k].replaceAll(", ", "");
-			}*/
 			for(int j=0;j<arr.length;j++) {
 				grid[i][j] = arr[j];
 			}
@@ -83,6 +80,7 @@ public class tripSearch {
 
 	static String getStopID(String[] string,String[] textStops,String[][] gridStopTimes, String[][] gridStops, int stopTimesSize,int stopsSize, String input) {
 		String answer="";
+		String finalAnswer="";
 		int duplicate=1;
 		for(int i=0;i<stopTimesSize;i++) {
 			int j=1;
@@ -94,10 +92,11 @@ public class tripSearch {
 				answer = "Match number "+ duplicate+ " to arrival time " + input+" is:\nStop ID: " + str + "\n"+ "Stop Code: "+ test[0] +
 						"\nStop Name: "+test[1]+"\nStop Destination: "+test[2]+"\nStop Latitude: "+test[3]+"\nStop Longitude: "+ test[4]+
 						"\nZone ID: "+ test[5];
-				return answer;
+				finalAnswer = finalAnswer + "\n" + answer + "\n";
+				duplicate++;
 			}
 		}
-		return null;
+		return finalAnswer;
 	}
 
 	static String[] stopData(String[] textStops,String[][] gridStops, String stopID, int stopsSize) {
@@ -144,9 +143,7 @@ public class tripSearch {
 			System.out.println("Enter your arrival time in 24hr format now (hh:mm:ss): ");
 			answer = scan.nextLine();
 			answer = answer.replaceAll(" ", "");
-			System.out.println("you entered: " + answer);
 			valid = validArrivalTime(gridStopTimes,sizeStopTimes,answer);
-			System.out.println(gridStopTimes[1][1]);
 			if(valid==true) {
 				System.out.println("Yay! Arrival time is valid!\n ");
 				String stopInformation = getStopID(textStops,textStopTimes,gridStopTimes, gridStops, sizeStopTimes,sizeStops, answer);
