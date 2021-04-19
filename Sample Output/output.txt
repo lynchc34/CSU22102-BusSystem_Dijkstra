@@ -1,0 +1,35 @@
+Enter your arrival time in 24hr format now (hh:mm:ss): 
+23:10:34
+you entered: 23:10:34
+5:25:00
+Yay! Arrival time is valid!
+ 
+Match number 1 to arrival time 23:10:34 is:
+Stop ID: 896
+Stop Code: 50889
+Stop Name: EB E BROADWAY FS LAKEWOOD DR
+Stop Destination: E BROADWAY @ LAKEWOOD DR
+Stop Latitude: 49.262171
+Stop Longitude: -123.061609
+Zone ID: ZN 99
+
+Do you wish to check another arrival time?(yes or no)
+yes
+Enter your arrival time in 24hr format now (hh:mm:ss): 
+12:34:50
+you entered: 12:34:50
+5:25:00
+Yay! Arrival time is valid!
+ 
+Match number 1 to arrival time 12:34:50 is:
+Stop ID: 591
+Stop Code: 50585
+Stop Name: WB W 4 AVE FS MACDONALD ST
+Stop Destination: W 4 AVE @ MACDONALD ST
+Stop Latitude: 49.268459
+Stop Longitude: -123.168863
+Zone ID: ZN 99
+
+Do you wish to check another arrival time?(yes or no)
+no
+No Problem! Have a nice Day! 
