@@ -16,9 +16,7 @@ public class tripSearch {
 
 		try {
 			String charset = "UTF-8";
-			BufferedReader br = new BufferedReader(
-					new InputStreamReader(
-							new FileInputStream(filename), charset)); 
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), charset)); 
 			br.mark(1);
 			if (br.read() != 0xFEFF)
 				br.reset();
@@ -168,7 +166,18 @@ public class tripSearch {
 			System.out.println("Enter your arrival time in 24hr format now (hh:mm:ss): ");
 			answer = scan.nextLine();
 			answer = answer.replaceAll(" ", "");
-			valid = validArrivalTime(gridStopTimes,sizeStopTimes,answer);
+			String[] validChecker = answer.split(":");
+			int[] changetoInt = new int [validChecker.length];
+			boolean extraMessage = false;
+			for(int i=0;i<validChecker.length;i++) {
+				changetoInt[i] = Integer.parseInt(validChecker[i]);
+			}
+			if(changetoInt[0]>24 || changetoInt[1]>59  || changetoInt[2]>59) {
+				valid = false;
+			}else {
+				valid = validArrivalTime(gridStopTimes,sizeStopTimes,answer);
+				extraMessage = true;
+			}
 			if(valid==true) {
 				System.out.println("Yay! Arrival time is valid!\n ");
 				String stopInformation = getStopID(textStops,textStopTimes,gridStopTimes, gridStops, sizeStopTimes,sizeStops, answer);
@@ -186,7 +195,12 @@ public class tripSearch {
 				}
 			}
 			else {
-				System.out.println("Sorry, there are no arrival times that suit what you entered, try again!");
+				if(extraMessage) {
+					System.out.println("Sorry, the time you entered exceeds the valid time format (24:59:59), try again!");
+				}else {
+					System.out.println("Sorry, there are no arrival times that suit what you entered, try again!");
+
+				}
 			}
 		}
 
@@ -232,4 +246,65 @@ public class tripSearch {
 		return a;
 
 	}//end quicksort
+	
+	public static String finalMain(String stopsPath, String stopTimesPath, String userInput)  throws IOException{
+		Scanner scan = new Scanner(System.in);
+		//stop times
+		String stopTimes= stopTimesPath;
+		int sizeStopTimes = arraySize(stopTimes);
+		String[] textStopTimes = textTo2D(stopTimes, sizeStopTimes);
+		String[][] gridStopTimes = fullGrid(textStopTimes, sizeStopTimes);
+
+		//stops
+		String stops= stopsPath;
+		int sizeStops = arraySize(stops);
+		String[] textStops = textTo2D(stops, sizeStops);
+		String[][] gridStops = fullGrid(textStops, sizeStops);
+
+		String answer,anotherOne;
+		boolean valid=false;
+		while(!valid) {
+			/*answer ="";
+			System.out.println("Enter your arrival time in 24hr format now (hh:mm:ss): ");
+			answer = scan.nextLine();*/
+			userInput = userInput.replaceAll(" ", "");
+			String[] validChecker = userInput.split(":");
+			int[] changetoInt = new int [validChecker.length];
+			boolean extraMessage = false;
+			for(int i=0;i<validChecker.length;i++) {
+				changetoInt[i] = Integer.parseInt(validChecker[i]);
+			}
+			if(changetoInt[0]>24 || changetoInt[1]>59  || changetoInt[2]>59) {
+				valid = false;
+			}else {
+				valid = validArrivalTime(gridStopTimes,sizeStopTimes,userInput);
+				extraMessage = true;
+			}
+			if(valid==true) {
+				System.out.println("Yay! Arrival time is valid!\n ");
+				String stopInformation = getStopID(textStops,textStopTimes,gridStopTimes, gridStops, sizeStopTimes,sizeStops, userInput);
+				return stopInformation;
+				/*System.out.println("\nDo you wish to check another arrival time?(yes or no)");
+				anotherOne = scan.nextLine();
+				anotherOne.toLowerCase();
+				anotherOne = anotherOne.replaceAll(" ", "");
+				if(anotherOne.equals("yes")) {
+					valid=false;
+				}
+				else {
+					System.out.println("No Problem! Have a nice Day! ");
+					System.exit(1);
+				}*/
+			}
+			else {
+				if(extraMessage) {
+					return "Sorry, the time you entered exceeds the valid time format (24:59:59), try again!";
+				}else {
+					return "Sorry, there are no arrival times that suit what you entered, try again!";
+
+				}
+			}
+		}
+		return null;
+	}
 }
