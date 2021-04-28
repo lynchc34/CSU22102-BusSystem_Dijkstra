@@ -6,11 +6,15 @@ public class DirectedEdge {
 	private final int v;
 	private final int w;
 	private final double weight;
+//	private final int transferType;
 	
+	//edited to add transfer type
+	// taking into account "transfers.txt"
 	public DirectedEdge(int v, int w, double weight) {
 		this.v = v;
 		this.w = w;
 		this.weight = weight;
+//		this.transferType = transferType;
 	}
 	
 	public int from() {
