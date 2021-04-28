@@ -1,0 +1,350 @@
+Enter your arrival time in 24hr format now (hh:mm:ss): 
+13:44:12
+Yay! Arrival time is valid!
+ 
+
+Match number 1 to arrival time 13:44:12 is:
+Stop ID: 696
+Stop Code: 50689
+Stop Name: WB E PENDER ST FS MAIN ST-
+Stop Destination: E PENDER ST @ MAIN ST
+Stop Latitude: 49.280463
+Stop Longitude: -123.100688
+Zone ID: ZN 99
+
+Match number 2 to arrival time 13:44:12 is:
+Stop ID: 776
+Stop Code: 50769
+Stop Name: NB GRANVILLE ST FS W 46 AVE
+Stop Destination: GRANVILLE ST @ W 46 AVE
+Stop Latitude: 49.229985
+Stop Longitude: -123.139609
+Zone ID: ZN 99
+
+Match number 3 to arrival time 13:44:12 is:
+Stop ID: 2879
+Stop Code: 52850
+Stop Name: WB FOREST GROVE DR AT 9200 BLOCK
+Stop Destination: FOREST GROVE DR @ 9200 BLOCK
+Stop Latitude: 49.262961
+Stop Longitude: -122.906491
+Zone ID: ZN 99
+
+Match number 4 to arrival time 13:44:12 is:
+Stop ID: 12240
+Stop Code: 59569
+Stop Name: INLET CENTRE STN BAY 3
+Stop Destination: INLET CENTRE STN @ BAY 3
+Stop Latitude: 49.277105
+Stop Longitude: -122.826787
+Zone ID: ZN 99
+
+Match number 5 to arrival time 13:44:12 is:
+Stop ID: 6846
+Stop Code: 56781
+Stop Name: WB GRANVILLE AVE NS LEDWAY RD
+Stop Destination: GRANVILLE AVE @ LEDWAY RD
+Stop Latitude: 49.162860
+Stop Longitude: -123.161400
+Zone ID: ZN 99
+
+Match number 6 to arrival time 13:44:12 is:
+Stop ID: 571
+Stop Code: 50566
+Stop Name: WB W BROADWAY FS BALACLAVA ST
+Stop Destination: W BROADWAY @ BALACLAVA ST
+Stop Latitude: 49.264241
+Stop Longitude: -123.174408
+Zone ID: ZN 99
+
+Match number 7 to arrival time 13:44:12 is:
+Stop ID: 3429
+Stop Code: 50187
+Stop Name: WB W HASTINGS ST FS ABBOTT ST
+Stop Destination: W HASTINGS ST @ ABBOTT ST
+Stop Latitude: 49.282221
+Stop Longitude: -123.108043
+Zone ID: ZN 99
+
+Match number 8 to arrival time 13:44:12 is:
+Stop ID: 754
+Stop Code: 50747
+Stop Name: NB OAK ST FS W 57 AVE
+Stop Destination: OAK ST @ W 57 AVE
+Stop Latitude: 49.219518
+Stop Longitude: -123.128433
+Zone ID: ZN 99
+
+Match number 9 to arrival time 13:44:12 is:
+Stop ID: 3444
+Stop Code: 53407
+Stop Name: NB POIRIER ST FS KING ALBERT AVE
+Stop Destination: POIRIER ST @ KING ALBERT AVE
+Stop Latitude: 49.251690
+Stop Longitude: -122.846463
+Zone ID: ZN 99
+
+Match number 10 to arrival time 13:44:12 is:
+Stop ID: 11725
+Stop Code: 55425
+Stop Name: NB KING GEORGE BLVD FS 94A AVE
+Stop Destination: KING GEORGE BLVD @ 94A AVE
+Stop Latitude: 49.175231
+Stop Longitude: -122.845616
+Zone ID: ZN 99
+
+Match number 11 to arrival time 13:44:12 is:
+Stop ID: 5505
+Stop Code: 55452
+Stop Name: SB KING GEORGE BLVD FS 76 AVE
+Stop Destination: KING GEORGE BLVD @ 76 AVE
+Stop Latitude: 49.140079
+Stop Longitude: -122.845817
+Zone ID: ZN 99
+
+Match number 12 to arrival time 13:44:12 is:
+Stop ID: 11865
+Stop Code: 61778
+Stop Name: SB 128 ST FS 86 AVE
+Stop Destination: 128 ST @ 86 AVE
+Stop Latitude: 49.158447
+Stop Longitude: -122.868155
+Zone ID: ZN 99
+
+Match number 13 to arrival time 13:44:12 is:
+Stop ID: 6853
+Stop Code: 56788
+Stop Name: SB RAILWAY AVE AT 8600 BLOCK
+Stop Destination: RAILWAY AVE @ 8600 BLOCK
+Stop Latitude: 49.150081
+Stop Longitude: -123.169908
+Zone ID: ZN 99
+
+Match number 14 to arrival time 13:44:12 is:
+Stop ID: 5576
+Stop Code: 55521
+Stop Name: EB HWY 10 AT 13400 BLOCK
+Stop Destination: HWY 10 @ 13400 BLOCK
+Stop Latitude: 49.108105
+Stop Longitude: -122.850547
+Zone ID: ZN 99
+
+Match number 15 to arrival time 13:44:12 is:
+Stop ID: 1851
+Stop Code: 51837
+Stop Name: EB SE MARINE DR NS KERR ST
+Stop Destination: SE MARINE DR @ KERR ST
+Stop Latitude: 49.207748
+Stop Longitude: -123.044803
+Zone ID: ZN 99
+
+Match number 16 to arrival time 13:44:12 is:
+Stop ID: 2431
+Stop Code: 52407
+Stop Name: WB EDMONDS ST NS SALISBURY AVE
+Stop Destination: EDMONDS ST @ SALISBURY AVE
+Stop Latitude: 49.215402
+Stop Longitude: -122.956870
+Zone ID: ZN 99
+
+Match number 17 to arrival time 13:44:12 is:
+Stop ID: 3444
+Stop Code: 53407
+Stop Name: NB POIRIER ST FS KING ALBERT AVE
+Stop Destination: POIRIER ST @ KING ALBERT AVE
+Stop Latitude: 49.251690
+Stop Longitude: -122.846463
+Zone ID: ZN 99
+
+Match number 18 to arrival time 13:44:12 is:
+Stop ID: 4464
+Stop Code: 54414
+Stop Name: EB MARINE DR FS TATLOW AVE
+Stop Destination: MARINE DR @ TATLOW AVE
+Stop Latitude: 49.323841
+Stop Longitude: -123.117096
+Zone ID: ZN 99
+
+Match number 19 to arrival time 13:44:12 is:
+Stop ID: 5371
+Stop Code: 55318
+Stop Name: WB HWY 10 AT 18600 BLOCK
+Stop Destination: HWY 10 @ 18600 BLOCK
+Stop Latitude: 49.104208
+Stop Longitude: -122.707055
+Zone ID: ZN 99
+
+
+Do you wish to check another arrival time?(yes or no)
+yes
+Enter your arrival time in 24hr format now (hh:mm:ss): 
+7:13:13
+Yay! Arrival time is valid!
+ 
+
+Match number 1 to arrival time 7:13:13 is:
+Stop ID: 64
+Stop Code: 50064
+Stop Name: NB MACDONALD ST FS W 2 AVE
+Stop Destination: MACDONALD ST @ W 2 AVE
+Stop Latitude: 49.270382
+Stop Longitude: -123.168134
+Zone ID: ZN 99
+
+Match number 2 to arrival time 7:13:13 is:
+Stop ID: 616
+Stop Code: 50610
+Stop Name: NB DENMAN ST FS HARO ST
+Stop Destination: DENMAN ST @ HARO ST
+Stop Latitude: 49.290911
+Stop Longitude: -123.136163
+Zone ID: ZN 99
+
+Match number 3 to arrival time 7:13:13 is:
+Stop ID: 2050
+Stop Code: 52033
+Stop Name: WB W 49 AVE FS ALBERTA ST
+Stop Destination: W 49 AVE @ ALBERTA ST
+Stop Latitude: 49.226074
+Stop Longitude: -123.113387
+Zone ID: ZN 99
+
+Match number 4 to arrival time 7:13:13 is:
+Stop ID: 8797
+Stop Code: 58417
+Stop Name: EB WINSLOW AVE NS POIRIER ST
+Stop Destination: WINSLOW AVE @ POIRIER ST
+Stop Latitude: 49.253837
+Stop Longitude: -122.848304
+Zone ID: ZN 99
+
+Match number 5 to arrival time 7:13:13 is:
+Stop ID: 3219
+Stop Code: 53185
+Stop Name: WB SAINT JOHNS ST FS QUEENS ST
+Stop Destination: SAINT JOHNS ST @ QUEENS ST
+Stop Latitude: 49.276788
+Stop Longitude: -122.859242
+Zone ID: ZN 99
+
+Match number 6 to arrival time 7:13:13 is:
+Stop ID: 3815
+Stop Code: 53776
+Stop Name: NB MARY HILL RD FS LOBB AVE
+Stop Destination: MARY HILL RD @ LOBB AVE
+Stop Latitude: 49.253355
+Stop Longitude: -122.778707
+Zone ID: ZN 99
+
+Match number 7 to arrival time 7:13:13 is:
+Stop ID: 12028
+Stop Code: 53163
+Stop Name: NB JOHNSON ST FS GLEN DR
+Stop Destination: JOHNSON ST @ GLEN DR
+Stop Latitude: 49.282981
+Stop Longitude: -122.801486
+Zone ID: ZN 99
+
+Match number 8 to arrival time 7:13:13 is:
+Stop ID: 6498
+Stop Code: 56437
+Stop Name: NB NO. 1 RD FS TUCKER AVE
+Stop Destination: NO 1 RD @ TUCKER AVE
+Stop Latitude: 49.166246
+Stop Longitude: -123.181125
+Zone ID: ZN 99
+
+Match number 9 to arrival time 7:13:13 is:
+Stop ID: 6900
+Stop Code: 56835
+Stop Name: SB GILBERT RD FS BROADMOOR BLVD
+Stop Destination: GILBERT RD @ BROADMOOR BLVD
+Stop Latitude: 49.145760
+Stop Longitude: -123.147976
+Zone ID: ZN 99
+
+Match number 10 to arrival time 7:13:13 is:
+Stop ID: 10652
+Stop Code: 60727
+Stop Name: EB W BROADWAY ST FS BALACLAVA ST
+Stop Destination: W BROADWAY ST @ BALACLAVA ST
+Stop Latitude: 49.264095
+Stop Longitude: -123.173572
+Zone ID: ZN 99
+
+Match number 11 to arrival time 7:13:13 is:
+Stop ID: 579
+Stop Code: 50574
+Stop Name: WB W 10 AVE FS COURTENAY ST
+Stop Destination: W 10 AVE @ COURTENAY ST
+Stop Latitude: 49.263781
+Stop Longitude: -123.200725
+Zone ID: ZN 99
+
+Match number 12 to arrival time 7:13:13 is:
+Stop ID: 9063
+Stop Code: 58529
+Stop Name: EB W PENDER ST FS ABBOTT ST
+Stop Destination: W PENDER ST @ ABBOTT ST
+Stop Latitude: 49.280892
+Stop Longitude: -123.106976
+Zone ID: ZN 99
+
+Match number 13 to arrival time 7:13:13 is:
+Stop ID: 1624
+Stop Code: 51612
+Stop Name: SB KERR ST FS E 54 AVE
+Stop Destination: KERR ST @ E 54 AVE
+Stop Latitude: 49.219512
+Stop Longitude: -123.041457
+Zone ID: ZN 99
+
+Match number 14 to arrival time 7:13:13 is:
+Stop ID: 711
+Stop Code: 59094
+Stop Name: WB E 41 AVE FS FLEMING ST
+Stop Destination: E 41 AVE @ FLEMING ST
+Stop Latitude: 49.232762
+Stop Longitude: -123.073240
+Zone ID: ZN 99
+
+Match number 15 to arrival time 7:13:13 is:
+Stop ID: 2973
+Stop Code: 52942
+Stop Name: NB HOLDOM AVE FS FRANCES ST
+Stop Destination: HOLDOM AVE @ FRANCES ST
+Stop Latitude: 49.279421
+Stop Longitude: -122.980857
+Zone ID: ZN 99
+
+Match number 16 to arrival time 7:13:13 is:
+Stop ID: 11475
+Stop Code: 50536
+Stop Name: SB GRANVILLE ST FS DRAKE ST
+Stop Destination: GRANVILLE ST @ DRAKE ST
+Stop Latitude: 49.275928
+Stop Longitude: -123.128244
+Zone ID: ZN 99
+
+Match number 17 to arrival time 7:13:13 is:
+Stop ID: 1349
+Stop Code: 51338
+Stop Name: NB KNIGHT ST FS E 37 AVE
+Stop Destination: KNIGHT ST @ E 37 AVE
+Stop Latitude: 49.237188
+Stop Longitude: -123.076748
+Zone ID: ZN 99
+
+Match number 18 to arrival time 7:13:13 is:
+Stop ID: 1534
+Stop Code: 51522
+Stop Name: EB E KING EDWARD AVE FS SAINT CATHERINES ST
+Stop Destination: E KING EDWARD AVE @ SAINT CATHERINES ST
+Stop Latitude: 49.248521
+Stop Longitude: -123.085285
+Zone ID: ZN 99
+
+
+Do you wish to check another arrival time?(yes or no)
+no
+No Problem! Have a nice Day! 
