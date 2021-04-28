@@ -83,28 +83,37 @@ public class tripSearch {
 		String answer="";
 		String finalAnswer="";
 		ArrayList<String> quickSort = new ArrayList<String>();
+		ArrayList<String> stopID = new ArrayList<String>();
 		int duplicate=1;
 		for(int i=0;i<stopTimesSize;i++) {
 			int j=1;
 			String str = gridStopTimes[i][j];
+			String stopIDs = gridStopTimes[i][j];
 			if(str != null && str.equals(input)) {
-				str = gridStopTimes[i][3];
+				str = gridStopTimes[i][0]; //changes
+				stopIDs = gridStopTimes[i][3]; //changes
 				quickSort.add(str);
+				stopID.add(stopIDs);
 			}
 		}
 		String[] test;
 		String[] sendToQuickSort = quickSort.toArray(new String[0]);
+		String[] sendToStopID = stopID.toArray(new String[0]);
 		int[] realSend=new int[sendToQuickSort.length];
+		int[] realSendIDs=new int[sendToStopID.length];
 		for(int a=0;a<sendToQuickSort.length;a++) {
 			realSend[a] = Integer.parseInt(sendToQuickSort[a]);
+			realSendIDs[a] = Integer.parseInt(sendToStopID[a]);
 		}
 		realSend=quickSort(realSend);
+		realSendIDs=quickSort(realSendIDs);
 		for(int a=0;a<realSend.length;a++) {
 			sendToQuickSort[a] = Integer.toString(realSend[a]);
+			sendToStopID[a] = Integer.toString(realSendIDs[a]);
 		}
 		for(int b=0;b<realSend.length;b++) {
-			test = stopData(textStops, gridStops, sendToQuickSort[b],stopsSize);
-			answer = "Match number "+ duplicate+ " to arrival time " + input+" is:\nStop ID: " + test[0] + "\n"+ "Stop Code: "+ test[1] +
+			test = stopData(textStops, gridStops, sendToStopID[b],stopsSize); //changes below
+			answer = "Match number "+ duplicate+ " to arrival time " + input+" is:\nTrip ID: "+ sendToQuickSort[b] + "\nStop ID: " + test[0] + "\n"+ "Stop Code: "+ test[1] +
 					"\nStop Name: "+test[2]+"\nStop Destination: "+test[3]+"\nStop Latitude: "+test[4]+"\nStop Longitude: "+ test[5]+
 					"\nZone ID: "+ test[6];
 			finalAnswer = finalAnswer + "\n" + answer + "\n";
