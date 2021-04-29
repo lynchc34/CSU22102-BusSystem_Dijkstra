@@ -1,9 +1,12 @@
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -17,12 +20,38 @@ public class TST<Value> {
         private Value val;                     // value associated with string
     }
 
+    /**
+     * Initializes an empty string symbol table.
+     */
+    public TST(String file) {
+    }
     public static void main(String[] args) throws IOException{
         Scanner wordScan = new Scanner(System.in);
-        String stopNames = "stops.txt";
+        /*String stopNames = "stops.txt";
         int sizeStopNames = arraySize(stopNames);
-        //System.out.println("Size: "+sizeStopNames);
+        System.out.println("Size: "+sizeStopNames);*/
 
+        String answer = "";
+        System.out.println("Please enter the Bus Stop you require: ");
+        answer = wordScan.nextLine();
+        String[] validChecker = answer.split(",");
+
+
+        String filename = "stops.txt";
+        if (filename != null) {
+            try {
+                BufferedReader readIn = new BufferedReader(new FileReader(filename));
+                String str;
+                List<String> list = new ArrayList<String>();
+                while((str = readIn.readLine()) != null){
+                    list.add(str);
+                }
+                String[] stringArr = list.toArray(new String[0]);
+                System.out.print(stringArr[2]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
@@ -44,13 +73,8 @@ public class TST<Value> {
             System.out.println("Error");
 		}
 		return answer;
-	}
+	} 
 
-    /**
-     * Initializes an empty string symbol table.
-     */
-    public TST() {
-    }
 
     /**
      * Returns the number of key-value pairs in this symbol table.
