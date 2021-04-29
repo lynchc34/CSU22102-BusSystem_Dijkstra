@@ -63,6 +63,38 @@ public class ShortestPath {
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		//transfers.txt
+		try {
+
+			if(filename != null)
+			{
+				File f = new File(filename);
+				Scanner s1 = new Scanner(f);
+
+				for(int i=0; s1.hasNextLine(); i++)
+				{
+					line = s1.nextLine();//
+
+					if(i==0) continue;						//ignore first line of file with details
+					
+					street = line.trim().split(("\\s+"));	//get first lines details
+					
+					if(Integer.parseInt(street[3]) == 0)	//if transfer type = 0
+					{
+						graph.addEdge(new DirectedEdge(Integer.parseInt(street[0]), Integer.parseInt(street[1]), 2.00));
+					}
+					else if(Integer.parseInt(street[3]) == 2) //if transger type = 2
+					{
+						double weight = Double.parseDouble(street[4])/100;
+						
+						graph.addEdge(new DirectedEdge(Integer.parseInt(street[0]), Integer.parseInt(street[1]), weight));
+					}
+				}s1.close();
+			}
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
 
