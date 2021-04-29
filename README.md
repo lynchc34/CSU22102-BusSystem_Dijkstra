@@ -3,13 +3,13 @@ Repository Link --> https://github.com/lynchc34/CSU22102-Final-Proj/edit/main/RE
 
 End of year project/assignment completed alongside a team of the following memebers;
 
--Ciara Lynch 
+-Ciara Lynch --> Section 2 + README.txt + Desgin Doc P3
 
--James Fenlon
+-James Fenlon --> Section 3 + Design Doc P2
 
--Matthew Dowse
+-Matthew Dowse --> Section 1 +Design Doc P1
 
--Matthew Grouse
+-Matthew Grouse --> Section 4 + Design Doc intro/conc
 
 ## GitHub Cheatsheet
 
@@ -21,11 +21,3 @@ stage changes - `git add .`\
 commit changes - `git commit -m "<message>"`\
 push changes - `git push origin <branchname>`
 
-## Workflow
-
-1. decide on feature to complete
-2. update your local git repo
-3. create a new branch for your feature
-4. implement the feature
-5. add, commit and push your feature to github (your new branch)
-6. open a pull request & merge (check for clashes/errors prior)
