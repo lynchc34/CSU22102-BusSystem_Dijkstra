@@ -31,10 +31,10 @@ public class TST<Value> {
         int sizeStopNames = arraySize(stopNames);
         System.out.println("Size: "+sizeStopNames);*/
 
-        String answer = "";
+        /*String answer = "";
         System.out.println("Please enter the Bus Stop you require: ");
         answer = wordScan.nextLine();
-        String[] validChecker = answer.split(",");
+        String[] validChecker = answer.split(",");*/
 
 
         String filename = "stops.txt";
@@ -47,7 +47,25 @@ public class TST<Value> {
                     list.add(str);
                 }
                 String[] stringArr = list.toArray(new String[0]);
-                System.out.print(stringArr[2]);
+                System.out.print(stringArr[1]);
+                for (int count =0; count < 2; count++)
+                {
+                    String indexNode = stringArr[count];
+                    String[] addressSplit = indexNode.split(",",4);
+                    //System.out.println(addressSplit[2]);
+                    String addressSpecific = addressSplit[2];
+                    //System.out.println(addressSpecific);
+                    String[] keyWordSplit = addressSpecific.split(" ",2);
+                   /* String keyHolder = "";
+                   for (int i=keyWordSplit.length; i > -1; i--)
+                   {
+                       keyHolder = keyHolder.concat(keyWordSplit[i]);
+                   }*/
+                    System.out.println(keyWordSplit[1]);
+                    //addressSpecific = keyWordSplit2.concat(keyWordSplit1);
+                    //System.out.println(keyHolder);
+                }
+               
             } catch (IOException e) {
                 e.printStackTrace();
             }
