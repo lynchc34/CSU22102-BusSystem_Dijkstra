@@ -268,6 +268,7 @@ public class ShortestPath {
 			String str;
 			//String str2;
 			for(int i =0; s1.hasNextLine(); i++) {
+				
 				if(i==0)
 				{	
 					line = s1.nextLine(); //load title
@@ -275,7 +276,7 @@ public class ShortestPath {
 				}
 				str = s1.nextLine();
 				street = str.split(",");
-				System.out.println(street[3]);
+				
 				if(Integer.parseInt(street[3]) == from) {
 					while((Integer.parseInt(street[3]) != to))  
 					{
@@ -289,35 +290,6 @@ public class ShortestPath {
 				}
 				
 			}
-
-
-			/*
-			for(int i=0; s1.hasNextLine(); i++)
-			{
-				if(i==0)
-				{	
-					line = s1.nextLine(); //load title
-					//line = s1.nextLine(); //load title
-				}
-
-
-				line = s1.nextLine();
-				street = line.split(",");	//get first lines details
-
-
-				Scanner s2 = new Scanner(f);
-				//find first stop "from" and keep adding to the list until you reach "to"
-
-					if((Integer.parseInt(street[3]) == from) && (Integer.parseInt(street[3]) != to))  
-					{
-						line = s1.nextLine();
-						street2 = line.split(",");
-
-						String toAdd = street2[3];			
-						list.add(toAdd);				//add stop_id to list
-					}
-					return list;	//return here so that it does not add extra stops, (time effiency)?
-			 */
 
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
