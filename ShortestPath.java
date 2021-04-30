@@ -12,14 +12,36 @@ import java.util.Scanner;
 //by Matthew Dowse 19333534
 public class ShortestPath {
 
-	String line = null;
+	static String line = null;
 	private int N;		//total number of intersections
 	private int S;		//total number of streets
-	private EWDGraph graph;
+	private static EWDGraph graph;
 
-	private double[] distTo;          // distTo[v] = distance  of shortest s->v path
-	private DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
-	private IndexMinPQ<Double> pq;    // priority queue of vertices
+	private static double[] distTo;          // distTo[v] = distance  of shortest s->v path
+	private static DirectedEdge[] edgeTo;    // edgeTo[v] = last edge on shortest s->v path
+	private static IndexMinPQ<Double> pq;    // priority queue of vertices
+
+	public static void main(String args[])
+	{
+		int fromStop = 379;
+		int toStop = 1281;		
+
+		//		String output = "Shortest Path has cost of " + userInput(fromStop, toStop) +
+		//				" and the stops on that route are " + getListOfStops(fromStop,toStop);
+
+		String stops = "stops.txt";
+		String transfers = "transfers.txt";
+		String stopTimes = "stop_times.txt";
+
+		System.out.println(totalStops(stops));	// 8757 stops
+		System.out.println(totalStreets(transfers, stopTimes)); //863646 edges
+
+		System.out.println(getListOfStops(fromStop, toStop, stopTimes));
+
+		//System.out.println(output(fromStop, toStop, stopTimes));
+
+
+	}
 
 	//constructor to populate graph (Bus Routes/city plan)
 	// filename = "stop_times.txt"
@@ -29,9 +51,13 @@ public class ShortestPath {
 		String line = null;
 		String[] street = {}; 
 		String[] street2 = {}; 
-		
-		N = totalStops(filename);	
-		S = totalStreets(filename, filename2);
+
+		String stops = "stops.txt";
+		String transfers = "transfers.txt";
+		String stopTimes = "stop_times.txt";
+
+		N = totalStops(stops);	
+		S = totalStreets(transfers, stopTimes);
 		graph = new EWDGraph(N, S);			//create graph with N intersections and S streets
 
 		//NOTE NEED TO take into account transfer type/cost/weight etc
@@ -39,9 +65,9 @@ public class ShortestPath {
 		//NOTE use "stop_times.txt"
 		try {
 
-			if(filename != null)
+			if(stopTimes != null)
 			{
-				File f = new File(filename);
+				File f = new File(stopTimes);
 				Scanner s1 = new Scanner(f);
 
 				for(int i=0; s1.hasNextLine(); i++)
@@ -50,16 +76,16 @@ public class ShortestPath {
 
 					if(i==0) continue;						//ignore first line of file with details
 
-					street = line.trim().split(("\\s+"));	//get first lines details
+					street = line.split((","));	//get first lines details
 					String previousLine = line;				//to not skip lines
 					s1.nextLine();							//move to next line to get new details
-					street2 = line.trim().split(("\\s+"));	//get second lines details
+					street2 = line.split((","));	//get second lines details
 					line = previousLine;					//reset to not skip lines
 
 					//for stop_times.txt
 					if(street[0] == street2[0])				//if share the same trip_id then add edge
 					{
-						graph.addEdge(new DirectedEdge(Integer.parseInt(street[4]), Integer.parseInt(street2[4]), 1)); //edit for weight/cost
+						graph.addEdge(new DirectedEdge(Integer.parseInt(street[4]), Integer.parseInt(street2[4]), 1.00)); //edit for weight/cost
 					}
 
 				}s1.close();
@@ -71,9 +97,9 @@ public class ShortestPath {
 		//transfers.txt
 		try {
 
-			if(filename2 != null)
+			if(transfers != null)
 			{
-				File f = new File(filename2);
+				File f = new File(transfers);
 				Scanner s1 = new Scanner(f);
 
 				for(int i=0; s1.hasNextLine(); i++)
@@ -82,7 +108,7 @@ public class ShortestPath {
 
 					if(i==0) continue;						//ignore first line of file with details
 
-					street = line.trim().split(("\\s+"));	//get first lines details
+					street = line.split(",");	//get first lines details
 
 					if(Integer.parseInt(street[3]) == 0)	//if transfer type = 0
 					{
@@ -105,21 +131,21 @@ public class ShortestPath {
 	//User puts in from and to 
 	//NOTE use "stop_times.txt" to use trip_ID
 	//returns distance
-	public double userInput(int from, int to)
+	public static double userInput(int from, int to)
 	{
 		double distance = 0;
 
 		dijkstraSP(graph, from);							//computes shortest path
-		distance = distTo(to);								//returns shortest distance
-		
+		distance = distTo(to);
+
 		return distance;
 	}
-	
+
 	//call this method to return Shortest Path cost and stops on route
-	public String output(int from, int to)
+	public static String output(int from, int to, String filename)
 	{
-		String output = "Shortest Path has cost of " + userInput(from, to) +
-				" and the stops on that route are " + getListOfStops(from,to);
+		String output = "Shortest Path has cost of " + userInput(from, to); 
+		//	+	" and the stops on that route are " + getListOfStops(from,to, filename);
 
 		return output;
 	}
@@ -128,7 +154,7 @@ public class ShortestPath {
 	//adds 1 to totalAmount for each line
 	//remembering to subtract 1 from totalAmount as line 1 = title 
 	//READ IN FILE "stops.txt"
-	public int totalStops(String filename)
+	public static int totalStops(String filename)
 	{
 		int totalAmount = 0;
 
@@ -156,11 +182,12 @@ public class ShortestPath {
 	//READ IN FILE "transfers.txt" as each line is an edge, 
 	//and READ IN FILE "stop_times.txt"  
 	//but only add 1 to count if they are consecutive and share the same trip_id
-	public int totalStreets(String filename, String filename2)
+	public static int totalStreets(String filename, String filename2)
 	{
 		int totalAmount = 0;
 		String[] street = {}; 
 		String[] street2 = {}; 
+		String line = null;
 
 		//transfers.txt
 		try {
@@ -187,19 +214,29 @@ public class ShortestPath {
 
 			if(filename2 != null)
 			{
-				File f = new File(filename2);
-				Scanner s1 = new Scanner(f);
+				File f2 = new File(filename2);
+				Scanner s2 = new Scanner(f2);
 
-				for(int i=0; s1.hasNextLine(); i++)
+				for(int i=0; s2.hasNextLine(); i++)
 				{
-					line = s1.nextLine();
-					street = line.trim().split(("\\s+"));
+
+					if(i==0)
+					{	
+						line = s2.nextLine(); //load title
+						line = s2.nextLine(); //move to next line
+					}
+
+					line = s2.nextLine();
+					street = line.split(",");
+
 					String previousLine = line;				//to not skip lines
-					line = s1.nextLine();
-					street2 = line.trim().split(("\\s+"));
+
+					line = s2.nextLine();
+					street2 = line.split(",");
+
 					line = previousLine;					//reset to not skip a line
 
-					if(street[0] == street2[0]) //if they share the same trip_id
+					if(Integer.parseInt(street[0]) == Integer.parseInt(street2[0])) //if they share the same trip_id
 					{
 						totalAmount++;
 					}
@@ -214,10 +251,11 @@ public class ShortestPath {
 
 
 
+
 	//takes in from and to stop id's
 	//returns stops id's for stops between from and stop
 	//NOTE USE stop_times.txt
-	public List<String> getListOfStops(int from, int to)
+	public static List<String> getListOfStops(int from, int to, String filename)
 	{
 		List<String> list = new ArrayList<String>();	
 		String[] street = {}; 
@@ -225,27 +263,34 @@ public class ShortestPath {
 
 		try {
 
-			File f = new File("stop_times.txt");
+			File f = new File(filename);
 			Scanner s1 = new Scanner(f);
 
 			for(int i=0; s1.hasNextLine(); i++)
 			{
-				line = s1.nextLine();
-				street = line.trim().split(("\\s+"));	//get first lines details
+				if(i==0)
+				{	
+					line = s1.nextLine(); //load title
+					//line = s1.nextLine(); //load title
+				}
 
+				line = s1.nextLine();
+				street = line.split(",");	//get first lines details
+				
+				Scanner s2 = new Scanner(f);
 				//find first stop "from" and keep adding to the list until you reach "to"
-				while((Integer.parseInt(street[4]) == from) && (Integer.parseInt(street[4]) != to))  
+				for(int j=0; s2.hasNextLine(); j++)
 				{
-					line = s1.nextLine();
-					street2 = line.trim().split(("\\s+"));
-					if(Integer.parseInt(street[0]) == Integer.parseInt(street2[0])) //ensuring they are on the same trip_id
+					if((Integer.parseInt(street[3]) == from) && (Integer.parseInt(street[3]) != to))  
 					{
-						String toAdd = street2[4];			
+						line = s1.nextLine();
+						street2 = line.split(",");
+
+						String toAdd = street2[3];			
 						list.add(toAdd);				//add stop_id to list
 					}
-					
+					return list;	//return here so that it does not add extra stops, (time effiency)?
 				}
-				return list;	//return here so that it does not add extra stops, (time effiency)?
 			}
 
 		}catch(FileNotFoundException e) {
@@ -257,7 +302,7 @@ public class ShortestPath {
 	//Implementation of Dijkstra's Shortest Path Algorithm
 	//Code based from Algorithms 4th Edition by Robert Sedgewick and Kevin Wayne
 	//https://algs4.cs.princeton.edu/code/edu/princeton/cs/algs4/DijkstraSP.java.html
-	private void dijkstraSP(EWDGraph G, int s) {
+	private static void dijkstraSP(EWDGraph G, int s) {
 		// TODO Auto-generated method stub
 
 		distTo = new double[G.V()];
@@ -278,7 +323,7 @@ public class ShortestPath {
 	}
 
 	// relax edge e and update pq if changed
-	private void relax(DirectedEdge e) {
+	private static void relax(DirectedEdge e) {
 		int v = e.from(), w = e.to();
 		if (distTo[w] > distTo[v] + e.weight()) {
 			distTo[w] = distTo[v] + e.weight();
@@ -288,7 +333,7 @@ public class ShortestPath {
 		}
 	}
 
-	public double distTo(int v) {
+	public static double distTo(int v) {
 		return distTo[v];
 	}
 
