@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,6 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+
+/* authour Ciara Lynch
+* Implementation of Algorithm based on TST algorithm found in the Algorithms 4th Edition Textbook by Robert Sedgewick and Kevin Wayne. 
+* Copyright © 2000–2019
+* https://algs4.cs.princeton.edu/13stacks/Bag.java.html
+*/
 
 public class TST<Value> {
     private int n;              // size
@@ -25,53 +32,6 @@ public class TST<Value> {
      */
     public TST(String file) {
     }
-    public static void main(String[] args) throws IOException{
-        Scanner wordScan = new Scanner(System.in);
-        /*String stopNames = "stops.txt";
-        int sizeStopNames = arraySize(stopNames);
-        System.out.println("Size: "+sizeStopNames);*/
-
-        /*String answer = "";
-        System.out.println("Please enter the Bus Stop you require: ");
-        answer = wordScan.nextLine();
-        String[] validChecker = answer.split(",");*/
-
-
-        String filename = "stops.txt";
-        if (filename != null) {
-            try {
-                BufferedReader readIn = new BufferedReader(new FileReader(filename));
-                String str;
-                List<String> list = new ArrayList<String>();
-                while((str = readIn.readLine()) != null){
-                    list.add(str);
-                }
-                String[] stringArr = list.toArray(new String[0]);
-                System.out.print(stringArr[1]);
-                for (int count =0; count < 2; count++)
-                {
-                    String indexNode = stringArr[count];
-                    String[] addressSplit = indexNode.split(",",4);
-                    //System.out.println(addressSplit[2]);
-                    String addressSpecific = addressSplit[2];
-                    //System.out.println(addressSpecific);
-                    String[] keyWordSplit = addressSpecific.split(" ",2);
-                   /* String keyHolder = "";
-                   for (int i=keyWordSplit.length; i > -1; i--)
-                   {
-                       keyHolder = keyHolder.concat(keyWordSplit[i]);
-                   }*/
-                    System.out.println(keyWordSplit[1]);
-                    //addressSpecific = keyWordSplit2.concat(keyWordSplit1);
-                    //System.out.println(keyHolder);
-                }
-               
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
     static int arraySize(String filename) throws IOException {
 		int answer=0;
@@ -92,6 +52,123 @@ public class TST<Value> {
 		}
 		return answer;
 	} 
+
+    public static void main(String[] args) throws IOException{
+        Scanner wordScan = new Scanner(System.in);
+        /*String stopNames = "stops.txt";
+        int sizeStopNames = arraySize(stopNames);
+        System.out.println("Size: "+sizeStopNames);*/
+
+        /*String answer = "";
+        System.out.println("Please enter the Bus Stop you require: ");
+        answer = wordScan.nextLine();
+        String[] validChecker = answer.split(",");*/
+
+        String filename = "stops.txt";
+        if (filename != null) {
+            try {
+                BufferedReader readIn = new BufferedReader(new FileReader(filename));
+                String str;
+                List<String> list = new ArrayList<String>();
+                while((str = readIn.readLine()) != null){
+                    list.add(str);
+                }
+                String[] stringArr = list.toArray(new String[0]);
+                //System.out.print(stringArr[1]);
+                for (int count =1; count < stringArr.length; count++)
+                {
+                    String indexNode = stringArr[count];
+                    String[] addressSplit = indexNode.split(",",4);
+                    String addressSpecific = addressSplit[2];
+                    String[] keyWordSplit = addressSpecific.split(" ",2);
+                    addressSpecific = keyWordSplit[1] + " " + keyWordSplit[0];
+                   addressSplit[2] = addressSpecific;
+                   String addressHold = "";
+                   
+                   for (int i =0; i < addressSplit.length; i++){
+                    addressHold = addressHold + addressSplit[i] +  ",";
+                       //addressHold = addressHold.concat(addressSplit[i]);
+                   }
+                   stringArr[count] = addressHold;
+                }
+                TST<Integer> tst = new TST<Integer>(str);
+                for (int count = 1; count < stringArr.length; count++){
+                    tst.put(stringArr[count], count-1);
+                }
+                //Test get method on split string from tree
+               /* int test = tst.get("1477,51465,HASTINGS ST FS WILLINGDON AVE WB,HASTINGS ST @ WILLINGDON AVE,49.281124,-123.003973,ZN 99, ,0,,");
+                System.out.println(test);*/
+            
+                System.out.println(interfaceCall("stops.txt", "HASTINGS ST"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static String interfaceCall(String file, String userInputString) {
+        Scanner wordScan = new Scanner(System.in);
+        String fileName = file;
+        String interfaceString ="";
+        if (fileName != null) {
+            try {
+                BufferedReader readIn = new BufferedReader(new FileReader(fileName));
+                String str;
+                List<String> list = new ArrayList<String>();
+                while((str = readIn.readLine()) != null){
+                    list.add(str);
+                }
+                String[] stringArr = list.toArray(new String[0]);
+                //System.out.print(stringArr[1]);
+                for (int count =1; count < stringArr.length; count++)
+                {
+                    String indexNode = stringArr[count];
+                    String[] addressSplit = indexNode.split(",",4);
+                    String addressSpecific = addressSplit[2];
+                    String[] keyWordSplit = addressSpecific.split(" ",2);
+                    addressSpecific = keyWordSplit[1] + " " + keyWordSplit[0];
+                   addressSplit[2] = addressSpecific;
+                   String addressHold = "";
+                   
+                   for (int i =0; i < addressSplit.length; i++){
+                    addressHold = addressHold + addressSplit[i] +  ",";
+                       //addressHold = addressHold.concat(addressSplit[i]);
+                   }
+                   stringArr[count] = addressHold;
+                }
+                TST<Integer> tst = new TST<Integer>(str);
+                for (int count = 1; count < stringArr.length; count++){
+                    tst.put(stringArr[count], count-1);
+                }
+                readIn.close();
+
+                //Test get method on split string from tree
+                
+                int userReturn = tst.get(userInputString);
+                interfaceString = String.valueOf(userReturn);
+                return interfaceString;
+            
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return interfaceString;
+        
+    }
+
+
+    static String fullSearch () {
+
+        
+
+
+
+        String answer = "";
+        return answer;
+    }
+
+    
 
 
     /**
@@ -276,44 +353,5 @@ public class TST<Value> {
     }
 
 
-    /**
-     * Unit tests the {@code TST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    /*public static void main(String[] args) {
-
-        // build symbol table from standard input
-        TST<Integer> st = new TST<Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-
-        // print results
-        if (st.size() < 100) {
-            StdOut.println("keys(\"\"):");
-            for (String key : st.keys()) {
-                StdOut.println(key + " " + st.get(key));
-            }
-            StdOut.println();
-        }
-
-        StdOut.println("longestPrefixOf(\"shellsort\"):");
-        StdOut.println(st.longestPrefixOf("shellsort"));
-        StdOut.println();
-
-        StdOut.println("longestPrefixOf(\"shell\"):");
-        StdOut.println(st.longestPrefixOf("shell"));
-        StdOut.println();
-
-        StdOut.println("keysWithPrefix(\"shor\"):");
-        for (String s : st.keysWithPrefix("shor"))
-            StdOut.println(s);
-        StdOut.println();
-
-        StdOut.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
-            StdOut.println(s);
-    }*/
+    
 }

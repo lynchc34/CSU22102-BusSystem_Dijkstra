@@ -261,7 +261,7 @@ public class tripSearch {
 		String[] textStops = textTo2D(stops, sizeStops);
 		String[][] gridStops = fullGrid(textStops, sizeStops);
 
-		String answer,anotherOne;
+		//String answer,anotherOne;
 		boolean valid=false;
 		while(!valid) {
 			/*answer ="";
