@@ -41,8 +41,13 @@ public class Interface {
    tripSearch ts = new tripSearch();
    String stops = "stops.txt";
    String stopTimes =  "stop_times.txt";
+   String transfers = "transfers.txt";
    
-   private JLabel msglabel;
+   ShortestPath sp = new ShortestPath(stops,transfers,stopTimes);
+   
+   TST tit = new TST(stops);
+   
+  
    
    
    final static String BUTTONPANEL = "Card with JButtons";
@@ -54,12 +59,7 @@ public class Interface {
    }
    public static void main(String[] args) throws IOException{
       Interface swingLayoutDemo = new Interface();  
-      swingLayoutDemo.showCardLayoutDemo();   
-    
-     
-    
-    
-      
+      swingLayoutDemo.showCardLayoutDemo();      
       
          
    }
@@ -236,12 +236,15 @@ public class Interface {
 		        //your actions
 		    	String text = textField.getText();
 		    	
-		    	if(text == "") {
-		    		textArea1.setText("Wrong or null input");
-		    	}
-		    	else {
-		    	textArea1.setText("working");
-		    	}
+		    	String result = sp.output(text,stopTimes);
+		    	
+		    
+		    	
+		    	textArea1.setText(result);
+		    	
+		    	//String result = sp.output(from, to);
+		    	
+		    	//textArea1.setText(result);
 		    }
 });
       text1.add(submit);    
@@ -272,13 +275,11 @@ public class Interface {
 		    public void actionPerformed(ActionEvent e) {
 		        //your actions
 		    	String text = textField2.getText();
+		    	String result = tit.interfaceCall(stops, text);
 		    	
-		    	if(text == "") {
-		    		textArea2.setText("Wrong or null input");
-		    	}
-		    	else {
-		    	textArea2.setText("working");
-		    	}
+		    	System.out.println(result);
+				textArea2.setText(result);
+		    	
 		    }
 });
       text2.add(submit2);
@@ -313,12 +314,8 @@ public class Interface {
 						
 						System.out.println(result);
 						textArea3.setText(result);
-					}
-		    	 
-		    	
+					}   	
 		    	catch(IOException a){
-		    		
-		    	
 		    }
 		    }
 });

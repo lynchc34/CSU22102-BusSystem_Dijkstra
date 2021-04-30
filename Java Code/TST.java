@@ -1,11 +1,21 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
+
+/* authour Ciara Lynch 
+* Implementation of Algorithm based on TST algorithm found in the Algorithms 4th Edition Textbook by Robert Sedgewick and Kevin Wayne. 
+* Copyright © 2000–2019
+* https://algs4.cs.princeton.edu/13stacks/Bag.java.html
+*/
 
 public class TST<Value> {
     private int n;              // size
@@ -17,41 +27,135 @@ public class TST<Value> {
         private Value val;                     // value associated with string
     }
 
-    public static void main(String[] args) throws IOException{
-        Scanner wordScan = new Scanner(System.in);
-        String stopNames = "stops.txt";
-        int sizeStopNames = arraySize(stopNames);
-        //System.out.println("Size: "+sizeStopNames);
-
-    }
-
-
-    static int arraySize(String filename) throws IOException {
-		int answer=0;
-
-		try {
-			String charset = "UTF-8";
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), charset)); 
-			br.mark(1);
-			if (br.read() != 0xFEFF)
-				br.reset();
-			String line;
-			while((line = br.readLine() ) != null) {
-				answer++;
-			}
-		}
-		catch(FileNotFoundException e) {
-            System.out.println("Error");
-		}
-		return answer;
-	}
-
     /**
      * Initializes an empty string symbol table.
      */
-    public TST() {
+    public TST(String file) {
     }
 
+
+    public static void main(String[] args) throws IOException{
+        Scanner wordScan = new Scanner(System.in);
+        /*String stopNames = "stops.txt";
+        int sizeStopNames = arraySize(stopNames);
+        System.out.println("Size: "+sizeStopNames);*/
+
+        /*String answer = "";
+        System.out.println("Please enter the Bus Stop you require: ");
+        answer = wordScan.nextLine();
+        String[] validChecker = answer.split(",");*/
+
+        String filename = "stops.txt";
+        if (filename != null) {
+            try {
+                BufferedReader readIn = new BufferedReader(new FileReader(filename));
+                String str;
+                List<String> list = new ArrayList<String>();
+                while((str = readIn.readLine()) != null){
+                    list.add(str);
+                }
+                String[] stringArr = list.toArray(new String[0]);
+                //System.out.print(stringArr[1]);
+                for (int count =1; count < stringArr.length; count++)
+                {
+                    String indexNode = stringArr[count];
+                    String[] addressSplit = indexNode.split(",",4);
+                    String addressSpecific = addressSplit[2];
+                    String[] keyWordSplit = addressSpecific.split(" ",2);
+                    addressSpecific = keyWordSplit[1] + " " + keyWordSplit[0];
+                   addressSplit[2] = addressSpecific;
+                   String addressHold = "";
+                   
+                   for (int i =0; i < addressSplit.length; i++){
+                    addressHold = addressHold + addressSplit[i] +  ",";
+                       //addressHold = addressHold.concat(addressSplit[i]);
+                   }
+                   stringArr[count] = addressHold;
+                }
+                TST<Integer> tst = new TST<Integer>(str);
+                for (int count = 1; count < stringArr.length; count++){
+                    tst.put(stringArr[count], count-1);
+                }
+                readIn.close();
+                //Test get method on split string from tree
+               /* int test = tst.get("1477,51465,HASTINGS ST FS WILLINGDON AVE WB,HASTINGS ST @ WILLINGDON AVE,49.281124,-123.003973,ZN 99, ,0,,");
+                System.out.println(test);*/
+            
+                System.out.println(interfaceCall("stops.txt", "HASTINGS ST"));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /* Method to be called for Part 4 User Interface
+    * Takes in the file and user input and returns the 
+    * requested bus stop strings
+    */
+
+    public static String interfaceCall(String file, String userInputString) {
+        Scanner wordScan = new Scanner(System.in);
+        String fileName = file;
+       // String interfaceString ="";
+        String answer = "";
+        if (fileName != null) {
+            try {
+                BufferedReader readIn = new BufferedReader(new FileReader(fileName));
+                String str;
+                List<String> list = new ArrayList<String>();
+                while((str = readIn.readLine()) != null){
+                    list.add(str);
+                }
+                String[] stringArr = list.toArray(new String[0]);
+                //System.out.print(stringArr[1]);
+                for (int count =1; count < stringArr.length; count++)
+                {
+                    String indexNode = stringArr[count];
+                    String[] addressSplit = indexNode.split(",",4);
+                    String addressSpecific = addressSplit[2];
+                    String[] keyWordSplit = addressSpecific.split(" ",2);
+                    addressSpecific = keyWordSplit[1] + " " + keyWordSplit[0];
+                   addressSplit[2] = addressSpecific;
+                   String addressHold = "";
+                   
+                   for (int i =0; i < addressSplit.length; i++){
+                    addressHold = addressHold + addressSplit[i] +  ",";
+                       //addressHold = addressHold.concat(addressSplit[i]);
+                   }
+                   stringArr[count] = addressHold;
+                }
+                TST<Integer> tst = new TST<Integer>(str);
+                for (int count = 1; count < stringArr.length; count++){
+                    tst.put(stringArr[count], count-1);
+                }
+                readIn.close();
+
+                
+                for (int i =1; i < stringArr.length; i++){
+                    String[] indexArr;
+                    indexArr = stringArr[i].split(",");
+                    userInputString = userInputString.toUpperCase();
+                    if (indexArr !=null && indexArr[2].contains(userInputString))
+                    {
+                        answer = answer + "\n" + stringArr[i];
+                    }
+                }
+                return answer;
+
+                /*int userReturn = tst.get(userInputString);
+                *interfaceString = String.valueOf(userReturn);
+                return interfaceString;*/
+            
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return answer;
+        
+    }
+
+    
     /**
      * Returns the number of key-value pairs in this symbol table.
      * @return the number of key-value pairs in this symbol table
@@ -133,35 +237,6 @@ public class TST<Value> {
     }
 
     /**
-     * Returns the string in the symbol table that is the longest prefix of {@code query},
-     * or {@code null}, if no such string.
-     * @param query the query string
-     * @return the string in the symbol table that is the longest prefix of {@code query},
-     *     or {@code null} if no such string
-     * @throws IllegalArgumentException if {@code query} is {@code null}
-     */
-    public String longestPrefixOf(String query) {
-        if (query == null) {
-            throw new IllegalArgumentException("calls longestPrefixOf() with null argument");
-        }
-        if (query.length() == 0) return null;
-        int length = 0;
-        Node<Value> x = root;
-        int i = 0;
-        while (x != null && i < query.length()) {
-            char c = query.charAt(i);
-            if      (c < x.c) x = x.left;
-            else if (c > x.c) x = x.right;
-            else {
-                i++;
-                if (x.val != null) length = i;
-                x = x.mid;
-            }
-        }
-        return query.substring(0, length);
-    }
-
-    /**
      * Returns all keys in the symbol table as an {@code Iterable}.
      * To iterate over all of the keys in the symbol table named {@code st},
      * use the foreach notation: {@code for (Key key : st.keys())}.
@@ -205,73 +280,8 @@ public class TST<Value> {
     }
 
 
-    /**
-     * Returns all of the keys in the symbol table that match {@code pattern},
-     * where . symbol is treated as a wildcard character.
-     * @param pattern the pattern
-     * @return all of the keys in the symbol table that match {@code pattern},
-     *     as an iterable, where . is treated as a wildcard character.
-     */
-    public Iterable<String> keysThatMatch(String pattern) {
-        //Queue<String> queue = new Queue<String>();
-    	Queue<String>queue = new LinkedList<String>();
-    	collect(root, new StringBuilder(), 0, pattern, queue);
-        return queue;
-    }
- 
-    private void collect(Node<Value> x, StringBuilder prefix, int i, String pattern, Queue<String> queue) {
-        if (x == null) return;
-        char c = pattern.charAt(i);
-        if (c == '.' || c < x.c) collect(x.left, prefix, i, pattern, queue);
-        if (c == '.' || c == x.c) {
-            if (i == pattern.length() - 1 && x.val != null) queue.add(prefix.toString() + x.c);
-            if (i < pattern.length() - 1) {
-                collect(x.mid, prefix.append(x.c), i+1, pattern, queue);
-                prefix.deleteCharAt(prefix.length() - 1);
-            }
-        }
-        if (c == '.' || c > x.c) collect(x.right, prefix, i, pattern, queue);
-    }
+    
 
 
-    /**
-     * Unit tests the {@code TST} data type.
-     *
-     * @param args the command-line arguments
-     */
-    /*public static void main(String[] args) {
-
-        // build symbol table from standard input
-        TST<Integer> st = new TST<Integer>();
-        for (int i = 0; !StdIn.isEmpty(); i++) {
-            String key = StdIn.readString();
-            st.put(key, i);
-        }
-
-        // print results
-        if (st.size() < 100) {
-            StdOut.println("keys(\"\"):");
-            for (String key : st.keys()) {
-                StdOut.println(key + " " + st.get(key));
-            }
-            StdOut.println();
-        }
-
-        StdOut.println("longestPrefixOf(\"shellsort\"):");
-        StdOut.println(st.longestPrefixOf("shellsort"));
-        StdOut.println();
-
-        StdOut.println("longestPrefixOf(\"shell\"):");
-        StdOut.println(st.longestPrefixOf("shell"));
-        StdOut.println();
-
-        StdOut.println("keysWithPrefix(\"shor\"):");
-        for (String s : st.keysWithPrefix("shor"))
-            StdOut.println(s);
-        StdOut.println();
-
-        StdOut.println("keysThatMatch(\".he.l.\"):");
-        for (String s : st.keysThatMatch(".he.l."))
-            StdOut.println(s);
-    }*/
+    
 }

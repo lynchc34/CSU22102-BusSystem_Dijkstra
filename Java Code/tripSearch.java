@@ -249,7 +249,7 @@ public class tripSearch {
 	
 	public static String finalMain(String stopsPath, String stopTimesPath, String userInput)  throws IOException{
 		Scanner scan = new Scanner(System.in);
-		//stop times
+		//stop times*
 		String stopTimes= stopTimesPath;
 		int sizeStopTimes = arraySize(stopTimes);
 		String[] textStopTimes = textTo2D(stopTimes, sizeStopTimes);
@@ -267,10 +267,14 @@ public class tripSearch {
 			/*answer ="";
 			System.out.println("Enter your arrival time in 24hr format now (hh:mm:ss): ");
 			answer = scan.nextLine();*/
+			
 			userInput = userInput.replaceAll(" ", "");
 			String[] validChecker = userInput.split(":");
 			int[] changetoInt = new int [validChecker.length];
 			boolean extraMessage = false;
+			try {
+				
+			
 			for(int i=0;i<validChecker.length;i++) {
 				changetoInt[i] = Integer.parseInt(validChecker[i]);
 			}
@@ -280,6 +284,10 @@ public class tripSearch {
 				valid = validArrivalTime(gridStopTimes,sizeStopTimes,userInput);
 				extraMessage = true;
 			}
+			}
+			catch(NumberFormatException e) {
+				return "Incorrect input. Try again";
+			}	
 			if(valid==true) {
 				System.out.println("Yay! Arrival time is valid!\n ");
 				String stopInformation = getStopID(textStops,textStopTimes,gridStopTimes, gridStops, sizeStopTimes,sizeStops, userInput);
