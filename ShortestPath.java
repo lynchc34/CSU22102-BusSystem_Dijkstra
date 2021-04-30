@@ -22,12 +22,14 @@ public class ShortestPath {
 	private IndexMinPQ<Double> pq;    // priority queue of vertices
 
 	//constructor to populate graph (Bus Routes/city plan)
+	// filename = "stop_times.txt"
+	// filename2 = "transfers.txt"
 	ShortestPath(String filename, String filename2){
 
 		String line = null;
 		String[] street = {}; 
 		String[] street2 = {}; 
-
+		
 		N = totalStops(filename);	
 		S = totalStreets(filename, filename2);
 		graph = new EWDGraph(N, S);			//create graph with N intersections and S streets
