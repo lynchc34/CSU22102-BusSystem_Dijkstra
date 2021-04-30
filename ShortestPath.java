@@ -33,9 +33,9 @@ public class ShortestPath {
 		String transfers = "transfers.txt";
 		String stopTimes = "stop_times.txt";
 
-		System.out.println(totalStops(stops));	// 8757 stops
-		System.out.println(totalStreets(transfers, stopTimes)); //863646 edges
-
+		//	System.out.println(totalStops(stops));	// 8757 stops
+		//System.out.println(totalStreets(transfers, stopTimes)); //863646 edges
+		//
 		System.out.println(getListOfStops(fromStop, toStop, stopTimes));
 
 		//System.out.println(output(fromStop, toStop, stopTimes));
@@ -265,7 +265,33 @@ public class ShortestPath {
 
 			File f = new File(filename);
 			Scanner s1 = new Scanner(f);
+			String str;
+			//String str2;
+			for(int i =0; s1.hasNextLine(); i++) {
+				if(i==0)
+				{	
+					line = s1.nextLine(); //load title
+					//line = s1.nextLine(); //load title
+				}
+				str = s1.nextLine();
+				street = str.split(",");
+				System.out.println(street[3]);
+				if(Integer.parseInt(street[3]) == from) {
+					while((Integer.parseInt(street[3]) != to))  
+					{
+						str = s1.nextLine();
 
+						street = str.split(",");
+						String toAdd = street[3];			
+						list.add(toAdd);				//add stop_id to list
+					}
+					return list;
+				}
+				
+			}
+
+
+			/*
 			for(int i=0; s1.hasNextLine(); i++)
 			{
 				if(i==0)
@@ -274,13 +300,14 @@ public class ShortestPath {
 					//line = s1.nextLine(); //load title
 				}
 
+
 				line = s1.nextLine();
 				street = line.split(",");	//get first lines details
-				
+
+
 				Scanner s2 = new Scanner(f);
 				//find first stop "from" and keep adding to the list until you reach "to"
-				for(int j=0; s2.hasNextLine(); j++)
-				{
+
 					if((Integer.parseInt(street[3]) == from) && (Integer.parseInt(street[3]) != to))  
 					{
 						line = s1.nextLine();
@@ -290,8 +317,7 @@ public class ShortestPath {
 						list.add(toAdd);				//add stop_id to list
 					}
 					return list;	//return here so that it does not add extra stops, (time effiency)?
-				}
-			}
+			 */
 
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
