@@ -9,7 +9,7 @@ End of year project/assignment completed alongside a team of the following memeb
 
 -Matthew Dowse --> Section 1 + Design Doc P1
 
--Matthew Grouse --> Section 4 + Design Doc intro/conc
+-Matthew Grouse --> Section 4 + Design Doc conclusion
 
 ## GitHub Cheatsheet
 
