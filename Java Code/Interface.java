@@ -3,7 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.event.*;
 import javax.swing.*;
-
+import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.FileInputStream ;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Interface {
    private JFrame mainFrame;
    private JLabel statusLabel;
@@ -28,8 +38,10 @@ public class Interface {
    protected JPanel text3;
    private JTextField textField3;
   
-
- 
+   tripSearch ts = new tripSearch();
+   String stops = "stops.txt";
+   String stopTimes =  "stop_times.txt";
+   
    private JLabel msglabel;
    
    
@@ -38,10 +50,18 @@ public class Interface {
 
    public Interface(){
       prepareGUI();
+    
    }
-   public static void main(String[] args){
+   public static void main(String[] args) throws IOException{
       Interface swingLayoutDemo = new Interface();  
-      swingLayoutDemo.showCardLayoutDemo();       
+      swingLayoutDemo.showCardLayoutDemo();   
+    
+     
+    
+    
+      
+      
+         
    }
    private void prepareGUI(){
       mainFrame = new JFrame("Vancouver Bus Planner");
@@ -71,19 +91,26 @@ public class Interface {
       ///////////////////////////////////////
       // Part1
       Frame1 = new JFrame("Vancouver Bus Planner");
+      Frame1.addWindowListener(new WindowAdapter() {
+          public void windowClosing(WindowEvent windowEvent){
+             System.exit(0);
+          }        
+       }); 
       Frame1.setSize(600,600);
       Frame1.setLayout(new GridLayout(3,1));
       textArea1 = new JTextArea(20,5);
       textArea1.setSize(300, 100);
       textArea1.setEditable(false);
-      JScrollPane scrollPane1 = new JScrollPane(textArea1);
+      textArea1.setMargin(new Insets(10,10,10,10));
+      
+      JScrollPane scrollPane1 = new JScrollPane(textArea1,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
       controlPanel1 = new JPanel();
       //controlPanel1.setLayout();
       //statusLabel1 = new JLabel("",JLabel.CENTER); 
       
       text1 = new JPanel(); 
       Frame1.add(text1);
-      Frame1.add(textArea1);
+      Frame1.add(scrollPane1);
       Frame1.add(controlPanel1);
      //Frame1.add(scrollPane1);
       Frame1.setVisible(false);
@@ -93,19 +120,26 @@ public class Interface {
       //PART2
       
       Frame2 = new JFrame("Vancouver Bus Planner");
+      Frame2.addWindowListener(new WindowAdapter() {
+          public void windowClosing(WindowEvent windowEvent){
+             System.exit(0);
+          }        
+       }); 
       Frame2.setSize(600,600);
       Frame2.setLayout(new GridLayout(3,1));
       textArea2 = new JTextArea(20,5);
       textArea2.setSize(300, 100);
       textArea2.setEditable(false);
-      JScrollPane scrollPane2 = new JScrollPane(textArea2);
+      textArea2.setMargin(new Insets(10,10,10,10));
+      
+      JScrollPane scrollPane2 = new JScrollPane(textArea2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
       controlPanel2 = new JPanel();
       //controlPanel1.setLayout();
      // statusLabel2 = new JLabel("",JLabel.CENTER); 
       
       text2 = new JPanel();
       Frame2.add(text2);
-      Frame2.add(textArea2);
+      Frame2.add(scrollPane2);
       Frame2.add(controlPanel2);
      //Frame1.add(scrollPane1);
       Frame2.setVisible(false);
@@ -115,24 +149,32 @@ public class Interface {
       //PART3
       
       Frame3 = new JFrame("Vancouver Bus Planner");
+      Frame3.addWindowListener(new WindowAdapter() {
+          public void windowClosing(WindowEvent windowEvent){
+             System.exit(0);
+          }        
+       }); 
       Frame3.setSize(600,600);
       Frame3.setLayout(new GridLayout(3,1));
       textArea3 = new JTextArea(20,5);
       textArea3.setSize(300, 100);
       textArea3.setEditable(false);
-      JScrollPane scrollPane3 = new JScrollPane(textArea3);
+      textArea3.setMargin(new Insets(10,10,10,10));
+      
+      JScrollPane scrollPane3 = new JScrollPane(textArea3,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
       controlPanel3 = new JPanel();
       //controlPanel1.setLayout();
      // statusLabel2 = new JLabel("",JLabel.CENTER); 
-      
+      //textArea.sc
       text3 = new JPanel();
   
       
       //Frame1.add(statusLabel2);
        
       Frame3.add(text3);
-      Frame3.add(textArea3);
+      Frame3.add(scrollPane3);
       Frame3.add(controlPanel3);
+     
      //Frame1.add(scrollPane1);
       Frame3.setVisible(false);
       
@@ -140,7 +182,7 @@ public class Interface {
       
       
    }
-   private void showCardLayoutDemo(){
+   private void showCardLayoutDemo()throws IOException{
 	   //MAINFRAME
 	   
 	   statusLabel.setText("----------------------------VANCOUVER BUS PLANNER----------------------------");
@@ -213,6 +255,7 @@ public class Interface {
 		    }
 });    
       textArea1.setText("Enter 2 bus stop names into the text box and press submit to get the bus journey" + "\n" + "in the format stop1,stop2");
+      textArea1.setFont(new Font("Serif",Font.CENTER_BASELINE, 15));
     //textArea1.setFont(new Font("Serif",Font.CENTER_BASELINE, 16));
       controlPanel1.add(cp1);
 
@@ -249,6 +292,7 @@ public class Interface {
 		    }
 });
       textArea2.setText("Enter a bus id for information" +"\n" + "in the format: text");
+      textArea2.setFont(new Font("Serif",Font.CENTER_BASELINE, 15));
       controlPanel2.add(cp2);
       
       ///////////////////////////////////////
@@ -261,16 +305,21 @@ public class Interface {
       JButton submit3 = new JButton("Submit");
       submit3.addActionListener(new ActionListener() {
 		    @Override
-		    public void actionPerformed(ActionEvent e) {
+		    public void actionPerformed(ActionEvent e)  {
 		        //your actions
 		    	String text = textField3.getText();
+		    	try {
+						String result = ts.finalMain(stops, stopTimes, text);		
+						
+						System.out.println(result);
+						textArea3.setText(result);
+					}
+		    	 
 		    	
-		    	if(text == "") {
-		    		textArea3.setText("Wrong or null input");
-		    	}
-		    	else {
-		    	textArea3.setText("working");
-		    	}
+		    	catch(IOException a){
+		    		
+		    	
+		    }
 		    }
 });
       text3.add(submit3);
@@ -283,9 +332,11 @@ public class Interface {
 		    	 Frame3.setVisible(false);
 		    }
 });
-      textArea3.setText("Enter Time for Bus journeys" +"\n" + "in the format: hh;mm;ss");
+      textArea3.setText("Enter Time for Bus journeys" +"\n" + "in the format: hh:mm:ss");
+      textArea3.setFont(new Font("Serif",Font.CENTER_BASELINE, 15));
       controlPanel3.add(cp3);
       
    
    }
+
 }
