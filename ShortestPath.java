@@ -102,14 +102,14 @@ public class ShortestPath {
 
 	//User puts in from and to 
 	//NOTE use "stop_times.txt" to use trip_ID
-	public void twoIntStops(int from, int to)
+	public double userInput(int from, int to)
 	{
 		double distance = 0;
 
-		List listOfStops = getListOfStops(from, to);		//list of stop_id between from and to
 		dijkstraSP(graph, from);							//computes shortest path
 		distance = distTo(to);								//returns shortest distance
-
+		
+		return distance;
 	}
 
 	//get total amount of Bus Stops
