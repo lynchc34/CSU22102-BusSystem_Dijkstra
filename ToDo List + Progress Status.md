@@ -13,21 +13,12 @@
 ## Functionality ToDo
 
 ### Part 1  --> Member; Matthew Dowse
-
-- [ ] 
-- [ ] 
+ 
 
 ### Part 2 --> Member; Ciara Lynch
 
-- [ ] 
-- [ ] 
 
 ### Part 3 --> Member; James Fenlon
 
-- [ ] 
-- [ ] 
 
 ### Part 4 --> Member; Matthew Grouse
-
-- [ ] 
-- [ ] 
