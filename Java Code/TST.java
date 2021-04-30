@@ -33,25 +33,6 @@ public class TST<Value> {
     public TST(String file) {
     }
 
-    static int arraySize(String filename) throws IOException {
-		int answer=0;
-
-		try {
-			String charset = "UTF-8";
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), charset)); 
-			br.mark(1);
-			if (br.read() != 0xFEFF)
-				br.reset();
-			String line;
-			while((line = br.readLine() ) != null) {
-				answer++;
-			}
-		}
-		catch(FileNotFoundException e) {
-            System.out.println("Error");
-		}
-		return answer;
-	} 
 
     public static void main(String[] args) throws IOException{
         Scanner wordScan = new Scanner(System.in);
@@ -95,6 +76,7 @@ public class TST<Value> {
                 for (int count = 1; count < stringArr.length; count++){
                     tst.put(stringArr[count], count-1);
                 }
+                readIn.close();
                 //Test get method on split string from tree
                /* int test = tst.get("1477,51465,HASTINGS ST FS WILLINGDON AVE WB,HASTINGS ST @ WILLINGDON AVE,49.281124,-123.003973,ZN 99, ,0,,");
                 System.out.println(test);*/
@@ -107,10 +89,16 @@ public class TST<Value> {
         }
     }
 
+    /* Method to be called for Part 4 User Interface
+    * Takes in the file and user input and returns the 
+    * requested bus stop strings
+    */
+
     public static String interfaceCall(String file, String userInputString) {
         Scanner wordScan = new Scanner(System.in);
         String fileName = file;
-        String interfaceString ="";
+       // String interfaceString ="";
+        String answer = "";
         if (fileName != null) {
             try {
                 BufferedReader readIn = new BufferedReader(new FileReader(fileName));
@@ -143,34 +131,30 @@ public class TST<Value> {
                 }
                 readIn.close();
 
-                //Test get method on split string from tree
                 
-                int userReturn = tst.get(userInputString);
-                interfaceString = String.valueOf(userReturn);
-                return interfaceString;
+                for (int i =1; i < stringArr.length; i++){
+                    String[] indexArr;
+                    indexArr = stringArr[i].split(",");
+                    if (indexArr !=null && indexArr[2].contains(userInputString))
+                    {
+                        answer = answer + "\n" + stringArr[i];
+                    }
+                }
+                return answer;
+
+                /*int userReturn = tst.get(userInputString);
+                *interfaceString = String.valueOf(userReturn);
+                return interfaceString;*/
             
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return interfaceString;
-        
-    }
-
-
-    static String fullSearch () {
-
-        
-
-
-
-        String answer = "";
         return answer;
+        
     }
 
     
-
-
     /**
      * Returns the number of key-value pairs in this symbol table.
      * @return the number of key-value pairs in this symbol table
@@ -252,35 +236,6 @@ public class TST<Value> {
     }
 
     /**
-     * Returns the string in the symbol table that is the longest prefix of {@code query},
-     * or {@code null}, if no such string.
-     * @param query the query string
-     * @return the string in the symbol table that is the longest prefix of {@code query},
-     *     or {@code null} if no such string
-     * @throws IllegalArgumentException if {@code query} is {@code null}
-     */
-    public String longestPrefixOf(String query) {
-        if (query == null) {
-            throw new IllegalArgumentException("calls longestPrefixOf() with null argument");
-        }
-        if (query.length() == 0) return null;
-        int length = 0;
-        Node<Value> x = root;
-        int i = 0;
-        while (x != null && i < query.length()) {
-            char c = query.charAt(i);
-            if      (c < x.c) x = x.left;
-            else if (c > x.c) x = x.right;
-            else {
-                i++;
-                if (x.val != null) length = i;
-                x = x.mid;
-            }
-        }
-        return query.substring(0, length);
-    }
-
-    /**
      * Returns all keys in the symbol table as an {@code Iterable}.
      * To iterate over all of the keys in the symbol table named {@code st},
      * use the foreach notation: {@code for (Key key : st.keys())}.
@@ -324,33 +279,7 @@ public class TST<Value> {
     }
 
 
-    /**
-     * Returns all of the keys in the symbol table that match {@code pattern},
-     * where . symbol is treated as a wildcard character.
-     * @param pattern the pattern
-     * @return all of the keys in the symbol table that match {@code pattern},
-     *     as an iterable, where . is treated as a wildcard character.
-     */
-    public Iterable<String> keysThatMatch(String pattern) {
-        //Queue<String> queue = new Queue<String>();
-    	Queue<String>queue = new LinkedList<String>();
-    	collect(root, new StringBuilder(), 0, pattern, queue);
-        return queue;
-    }
- 
-    private void collect(Node<Value> x, StringBuilder prefix, int i, String pattern, Queue<String> queue) {
-        if (x == null) return;
-        char c = pattern.charAt(i);
-        if (c == '.' || c < x.c) collect(x.left, prefix, i, pattern, queue);
-        if (c == '.' || c == x.c) {
-            if (i == pattern.length() - 1 && x.val != null) queue.add(prefix.toString() + x.c);
-            if (i < pattern.length() - 1) {
-                collect(x.mid, prefix.append(x.c), i+1, pattern, queue);
-                prefix.deleteCharAt(prefix.length() - 1);
-            }
-        }
-        if (c == '.' || c > x.c) collect(x.right, prefix, i, pattern, queue);
-    }
+    
 
 
     
