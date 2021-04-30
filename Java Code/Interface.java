@@ -7,24 +7,31 @@ import javax.swing.*;
 public class Interface {
    private JFrame mainFrame;
    private JLabel statusLabel;
-   
+   protected JTextArea textArea;
+   private JPanel controlPanel;
+     
    private JFrame Frame1;
    private JPanel controlPanel1;
    protected JTextArea textArea1;
-   protected JPanel text;
+   protected JPanel text1;
+   private JTextField textField;
    
    private JFrame Frame2;
    private JPanel controlPanel2;
    protected JTextArea textArea2;
+   protected JPanel text2;
+   private JTextField textField2;
    
    private JFrame Frame3;
    private JPanel controlPanel3;
    protected JTextArea textArea3;
+   protected JPanel text3;
+   private JTextField textField3;
   
-   private JLabel statusLabel2;
-   private JPanel controlPanel;
+
+ 
    private JLabel msglabel;
-   protected JTextArea textArea;
+   
    
    final static String BUTTONPANEL = "Card with JButtons";
    final static String TEXTPANEL = "Card with JTextField";
@@ -45,7 +52,7 @@ public class Interface {
      statusLabel = new JLabel("",JLabel.CENTER); 
      
       textArea = new JTextArea(20,5);
-     textArea.setSize(600, 100);
+     textArea.setSize(600, 200);
       textArea.setEditable(false);
       JScrollPane scrollPane = new JScrollPane(textArea);
 
@@ -65,21 +72,17 @@ public class Interface {
       // Part1
       Frame1 = new JFrame("Vancouver Bus Planner");
       Frame1.setSize(600,600);
-      Frame1.setLayout(new GridLayout(4,1));
+      Frame1.setLayout(new GridLayout(3,1));
       textArea1 = new JTextArea(20,5);
       textArea1.setSize(300, 100);
       textArea1.setEditable(false);
       JScrollPane scrollPane1 = new JScrollPane(textArea1);
       controlPanel1 = new JPanel();
       //controlPanel1.setLayout();
-      statusLabel2 = new JLabel("",JLabel.CENTER); 
+      //statusLabel1 = new JLabel("",JLabel.CENTER); 
       
-      text = new JPanel();
-  
-      
-      Frame1.add(statusLabel2);
-       
-      Frame1.add(text);
+      text1 = new JPanel(); 
+      Frame1.add(text1);
       Frame1.add(textArea1);
       Frame1.add(controlPanel1);
      //Frame1.add(scrollPane1);
@@ -87,12 +90,59 @@ public class Interface {
       
       ///////////////////////////////////////
       ///////////////////////////////////////
+      //PART2
+      
+      Frame2 = new JFrame("Vancouver Bus Planner");
+      Frame2.setSize(600,600);
+      Frame2.setLayout(new GridLayout(3,1));
+      textArea2 = new JTextArea(20,5);
+      textArea2.setSize(300, 100);
+      textArea2.setEditable(false);
+      JScrollPane scrollPane2 = new JScrollPane(textArea2);
+      controlPanel2 = new JPanel();
+      //controlPanel1.setLayout();
+     // statusLabel2 = new JLabel("",JLabel.CENTER); 
+      
+      text2 = new JPanel();
+      Frame2.add(text2);
+      Frame2.add(textArea2);
+      Frame2.add(controlPanel2);
+     //Frame1.add(scrollPane1);
+      Frame2.setVisible(false);
+      
+      ///////////////////////////////////////
+      ///////////////////////////////////////
+      //PART3
+      
+      Frame3 = new JFrame("Vancouver Bus Planner");
+      Frame3.setSize(600,600);
+      Frame3.setLayout(new GridLayout(3,1));
+      textArea3 = new JTextArea(20,5);
+      textArea3.setSize(300, 100);
+      textArea3.setEditable(false);
+      JScrollPane scrollPane3 = new JScrollPane(textArea3);
+      controlPanel3 = new JPanel();
+      //controlPanel1.setLayout();
+     // statusLabel2 = new JLabel("",JLabel.CENTER); 
+      
+      text3 = new JPanel();
+  
+      
+      //Frame1.add(statusLabel2);
+       
+      Frame3.add(text3);
+      Frame3.add(textArea3);
+      Frame3.add(controlPanel3);
+     //Frame1.add(scrollPane1);
+      Frame3.setVisible(false);
       
       
       
       
    }
    private void showCardLayoutDemo(){
+	   //MAINFRAME
+	   
 	   statusLabel.setText("----------------------------VANCOUVER BUS PLANNER----------------------------");
 	   
       textArea.setText( "-Press Bus Route to find the shortest path between two routes" +
@@ -114,7 +164,7 @@ public class Interface {
 		    public void actionPerformed(ActionEvent e) {
 		        //your actions
 		    	 mainFrame.setVisible(false);
-		    	 Frame1.setVisible(true);
+		    	 Frame2.setVisible(true);
 		    }
 });
       JButton c = new JButton("Bus Times");
@@ -123,7 +173,7 @@ public class Interface {
 		    public void actionPerformed(ActionEvent e) {
 		        //your actions
 		    	 mainFrame.setVisible(false);
-		    	 Frame1.setVisible(true);
+		    	 Frame3.setVisible(true);
 		    }
 });
       controlPanel.add(a);
@@ -131,10 +181,12 @@ public class Interface {
       controlPanel.add(c);
       ///////////////////////////////////////
       ///////////////////////////////////////
-    
-      statusLabel2.setText("Enter 2 bus stop names into the text box and press submit to get the bus journey(in the format stop1,stop2");
-      JTextField textField = new JTextField(20);
-      text.add(textField);
+      //FRAME1
+     
+      
+      textField = new JTextField(20); 
+     
+      text1.add(textField, JTextField.CENTER);
       JButton submit = new JButton("Submit");
       submit.addActionListener(new ActionListener() {
 		    @Override
@@ -150,7 +202,7 @@ public class Interface {
 		    	}
 		    }
 });
-      text.add(submit);
+      text1.add(submit);    
       JButton cp1 = new JButton("Return");;
       cp1.addActionListener(new ActionListener() {
 		    @Override
@@ -159,11 +211,81 @@ public class Interface {
 		    	 mainFrame.setVisible(true);
 		    	 Frame1.setVisible(false);
 		    }
-});
+});    
+      textArea1.setText("Enter 2 bus stop names into the text box and press submit to get the bus journey" + "\n" + "in the format stop1,stop2");
+    //textArea1.setFont(new Font("Serif",Font.CENTER_BASELINE, 16));
       controlPanel1.add(cp1);
-  
-      //controlPanel.add();
-     // controlPanel.add(card3);
+
+      ///////////////////////////////////////
+      ///////////////////////////////////////
+     //FRAME2
+      
+       textField2 = new JTextField(20); 
+     
+      text2.add(textField2, JTextField.CENTER);
+      JButton submit2 = new JButton("Submit");
+      submit2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        //your actions
+		    	String text = textField2.getText();
+		    	
+		    	if(text == "") {
+		    		textArea2.setText("Wrong or null input");
+		    	}
+		    	else {
+		    	textArea2.setText("working");
+		    	}
+		    }
+});
+      text2.add(submit2);
+      JButton cp2 = new JButton("Return");;
+      cp2.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        //your actions
+		    	 mainFrame.setVisible(true);
+		    	 Frame2.setVisible(false);
+		    }
+});
+      textArea2.setText("Enter a bus id for information" +"\n" + "in the format: text");
+      controlPanel2.add(cp2);
+      
+      ///////////////////////////////////////
+      ///////////////////////////////////////
+      //FRAME3
+      
+      textField3 = new JTextField(20); 
+      
+      text3.add(textField3, JTextField.CENTER);
+      JButton submit3 = new JButton("Submit");
+      submit3.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        //your actions
+		    	String text = textField3.getText();
+		    	
+		    	if(text == "") {
+		    		textArea3.setText("Wrong or null input");
+		    	}
+		    	else {
+		    	textArea3.setText("working");
+		    	}
+		    }
+});
+      text3.add(submit3);
+      JButton cp3 = new JButton("Return");;
+      cp3.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        //your actions
+		    	 mainFrame.setVisible(true);
+		    	 Frame3.setVisible(false);
+		    }
+});
+      textArea3.setText("Enter Time for Bus journeys" +"\n" + "in the format: hh;mm;ss");
+      controlPanel3.add(cp3);
+      
    
    }
 }
