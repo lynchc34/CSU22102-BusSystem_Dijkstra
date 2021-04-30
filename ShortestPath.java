@@ -109,8 +109,17 @@ public class ShortestPath {
 
 		dijkstraSP(graph, from);							//computes shortest path
 		distance = distTo(to);								//returns shortest distance
-
+		
 		return distance;
+	}
+	
+	//call this method to return Shortest Path cost and stops on route
+	public String output(int from, int to)
+	{
+		String output = "Shortest Path has cost of " + userInput(from, to) +
+				" and the stops on that route are " + getListOfStops(from,to);
+
+		return output;
 	}
 
 	//get total amount of Bus Stops
@@ -222,12 +231,17 @@ public class ShortestPath {
 				line = s1.nextLine();
 				street = line.trim().split(("\\s+"));	//get first lines details
 
-				while((Integer.parseInt(street[4]) == from) && (Integer.parseInt(street[4]) != to))
+				//find first stop "from" and keep adding to the list until you reach "to"
+				while((Integer.parseInt(street[4]) == from) && (Integer.parseInt(street[4]) != to))  
 				{
 					line = s1.nextLine();
 					street2 = line.trim().split(("\\s+"));
-					String toAdd = street2[4];
-					list.add(toAdd);				//add stop_id to list
+					if(Integer.parseInt(street[0]) == Integer.parseInt(street2[0])) //ensuring they are on the same trip_id
+					{
+						String toAdd = street2[4];			
+						list.add(toAdd);				//add stop_id to list
+					}
+					
 				}
 				return list;	//return here so that it does not add extra stops, (time effiency)?
 			}
