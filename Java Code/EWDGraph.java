@@ -35,12 +35,16 @@ public class EWDGraph {
 	}
 
 	private void validateVertex(int v) {
-		if (v < 0 || v >= V)
-			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+		if (v < 0 || v >= V)try {
+				
+			}catch(IllegalArgumentException e) {
+				System.out.println("vertex " + v + " is not between 0 and " + (V-1));
+			}
 	}
 	
 	public int V() {
 		return V;
+		
 	}
 	
 //	public Iterable<DirectedEdge> edges() {

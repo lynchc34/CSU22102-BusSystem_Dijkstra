@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
-/* authour Ciara Lynch
+/* authour Ciara Lynch 
 * Implementation of Algorithm based on TST algorithm found in the Algorithms 4th Edition Textbook by Robert Sedgewick and Kevin Wayne. 
-* Copyright Â© 2000â€“2019
+* Copyright © 2000–2019
 * https://algs4.cs.princeton.edu/13stacks/Bag.java.html
 */
 
@@ -135,6 +135,7 @@ public class TST<Value> {
                 for (int i =1; i < stringArr.length; i++){
                     String[] indexArr;
                     indexArr = stringArr[i].split(",");
+                    userInputString = userInputString.toUpperCase();
                     if (indexArr !=null && indexArr[2].contains(userInputString))
                     {
                         answer = answer + "\n" + stringArr[i];
